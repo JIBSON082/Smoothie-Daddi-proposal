@@ -1,1 +1,161 @@
 
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Smoothie Daddi | Website Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#13100C;--bg2:#1B1510;--card:#201911;
+  --cream:#FFF8EC;--mango:#F4A627;--mango2:#FCC95B;--tangerine:#E8562E;--mint:#8FBF8A;
+  --mut:#B8A98F;--line:rgba(244,166,39,.20);--r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+.disp{font-family:'Baloo 2',sans-serif}
+.pop{background:linear-gradient(100deg,var(--mango),var(--mango2),var(--mango));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--tangerine),var(--mango));z-index:200}
+.view{display:none;position:relative;z-index:1;min-height:100vh}.view.on{display:block;animation:in .6s cubic-bezier(.2,.7,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* blob accent */
+.blob{width:64px;height:64px;margin:22px auto;position:relative}
+.blob svg{width:100%;height:100%;animation:wob 5s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(8deg) scale(1.05)}}
+
+#home{padding:calc(48px + env(safe-area-inset-top)) 22px 60px;max-width:1080px;margin:auto;text-align:center}
+.eyebrow{font-size:13px;color:var(--mango);font-weight:600}
+.brand{font-size:clamp(44px,11vw,88px);font-weight:800;line-height:.95;margin:14px 0 8px}
+.sub{color:var(--mut);font-size:14px}
+.lead{max-width:540px;margin:22px auto 36px;color:#E9DFCB;font-weight:300;line-height:1.75;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
+.pc{position:relative;background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:22px;padding:28px 22px;cursor:pointer;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.pc::before{content:'';position:absolute;inset:0;background:radial-gradient(360px circle at var(--x,50%) var(--y,0),rgba(244,166,39,.18),transparent 60%);opacity:0;transition:.3s}
+.pc:hover{transform:translateY(-5px);border-color:var(--mango);box-shadow:0 20px 46px -22px rgba(244,166,39,.4)}.pc:hover::before{opacity:1}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:5px 13px;border-radius:99px;border:1px solid var(--line);color:var(--mango);margin-bottom:16px}
+.pc h2{font-family:'Baloo 2';font-size:23px;font-weight:700;margin-bottom:9px;line-height:1.2}.pc p{font-size:13px;color:var(--mut);line-height:1.65;margin-bottom:20px}
+.price{font-family:'Baloo 2';font-size:34px;font-weight:700}.usd{font-size:12px;color:var(--mut);margin:2px 0 18px}
+.btn{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;color:#1B1208;background:linear-gradient(100deg,var(--mango),var(--mango2));padding:11px 20px;border-radius:99px;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateX(3px);box-shadow:0 8px 22px -8px var(--mango)}
+.foot{margin-top:32px;font-size:12.5px;color:var(--mut)}
+
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 20px 12px;background:rgba(19,16,12,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav b{font-family:'Baloo 2';font-size:19px;font-weight:700}
+.ghost{background:none;border:1px solid var(--line);color:var(--cream);font-size:12px;font-weight:600;padding:8px 14px;border-radius:99px;cursor:pointer;transition:.25s}.ghost:hover{border-color:var(--mango);color:var(--mango)}
+.hero{padding:60px 22px 46px;max-width:900px;margin:auto}
+.hero h1{font-family:'Baloo 2';font-size:clamp(34px,7.5vw,60px);font-weight:700;line-height:1.08;margin:14px 0 16px}
+.hero p{color:#E9DFCB;font-weight:300;line-height:1.8;max-width:600px;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:34px}
+.stats div{background:var(--bg2);padding:16px 12px}.stats small{display:block;font-size:10px;color:var(--mut);margin-bottom:6px;font-weight:600}.stats span{font-size:15px;font-weight:700;font-family:'Baloo 2'}
+main{max-width:900px;margin:auto;padding:16px 22px 90px}
+section{margin-bottom:64px}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:22px}.sh .num{font-family:'Baloo 2';color:var(--mango);font-size:14px;font-weight:700;background:var(--card);border:1px solid var(--line);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}.sh h3{font-family:'Baloo 2';font-size:27px;font-weight:700}.sh hr{flex:1;border:0;height:1px;background:var(--line)}
+.body{color:#E9DFCB;line-height:1.85;font-weight:300;font-size:14.5px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:19px;transition:transform .25s,border-color .25s}.box:hover{transform:translateY(-3px);border-color:var(--mango)}
+.box h4{font-size:12px;letter-spacing:.02em;color:var(--mango);margin-bottom:7px;font-weight:700}.box p{font-size:13px;color:var(--mut);line-height:1.7}
+.wide{grid-column:1/-1}
+.steps{position:relative;padding-left:4px}.step{display:flex;gap:16px;position:relative;padding-bottom:24px}
+.step:not(:last-child)::after{content:'';position:absolute;left:16px;top:36px;bottom:0;width:1px;background:var(--line)}
+.dot{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--mango);display:grid;place-items:center;color:var(--mango);font-size:13px;font-weight:700;background:var(--bg);z-index:1;font-family:'Baloo 2'}
+.step h4{font-size:14.5px;margin:5px 0 4px;font-weight:700}.step p{font-size:13px;color:var(--mut);line-height:1.7}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.chip{text-align:center;padding:13px 8px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.chip b{display:block;font-size:12.5px;font-weight:700}.chip small{color:var(--mut);font-size:11px}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.f{display:flex;gap:10px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;line-height:1.5;color:#EDE4D3}.f svg{flex:none;width:16px;margin-top:2px;stroke:var(--mango)}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.tl div{padding:17px;border-radius:12px;background:var(--card);border:1px solid var(--line);border-top:2px solid var(--mango)}.tl b{display:block;font-size:11px;color:var(--mango);margin-bottom:7px;font-weight:700}.tl p{font-size:12.5px;color:var(--mut);line-height:1.6}
+.tbl{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.row{display:grid;grid-template-columns:1.1fr 2fr auto;gap:16px;padding:15px 18px;border-bottom:1px solid var(--line);align-items:center;font-size:13px}
+.row:nth-child(odd){background:var(--bg2)}.row b{font-weight:700}.row span{color:var(--mut);line-height:1.5}.row em{font-style:normal;color:var(--mango);font-weight:700;text-align:right}
+.row.free{background:rgba(244,166,39,.08)}.row s{color:var(--mut);margin-right:6px}.row .fb{background:#3E8E52;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:99px}
+.total{display:flex;justify-content:space-between;padding:16px 18px;background:#000;font-weight:700}.total em{color:var(--mango);font-style:normal}
+.pb{margin-top:24px;text-align:center;padding:40px 22px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(232,86,46,.22),transparent 65%),var(--bg2)}
+.pb .n{font-family:'Baloo 2';font-size:clamp(42px,9vw,70px);font-weight:700;line-height:1}.pb p{color:var(--mut);font-size:13px;margin-top:8px}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;margin:26px auto 0}.plan div{padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}.plan small{font-size:10px;color:var(--mut);font-weight:600}.plan b{display:block;font-size:24px;font-family:'Baloo 2';margin:4px 0}
+.terms{display:grid;gap:10px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:26px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}.contact small{display:block;font-size:10px;color:var(--mut);margin-bottom:4px;font-weight:600}
+footer{text-align:center;padding:26px;font-size:11px;color:#7A6B50;border-top:1px solid var(--line)}
+.rv{opacity:0;transform:translateY(26px) scale(.98);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.rv.s{opacity:1;transform:none}
+@media(max-width:900px){.cards{grid-template-columns:1fr}}
+@media(max-width:720px){.cards,.grid,.feats,.contact{grid-template-columns:1fr}.chips{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr auto}.row span{grid-column:1/-1;order:3}.hero{padding-top:40px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style></head><body>
+<div id="prog"></div>
+
+<div id="home" class="view on">
+  <div class="blob"><svg viewBox="0 0 64 64"><path d="M32 4c14 0 24 11 24 25S46 56 32 60C18 56 8 43 8 29S18 4 32 4z" fill="var(--mango)"/><circle cx="24" cy="26" r="3" fill="#1B1208"/><circle cx="40" cy="26" r="3" fill="#1B1208"/><path d="M22 36c5 5 15 5 20 0" stroke="#1B1208" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
+  <p class="eyebrow">Website Development Proposal</p>
+  <h1 class="brand disp">Smoothie <span class="pop">Daddi</span></h1>
+  <p class="sub">Shop 6, OPH Complex, LUTH · Idi-Araba, Lagos</p>
+  <p class="lead">Three ways to take Smoothie Daddi online — from a simple WhatsApp-order showroom to a full ordering system with accounts and payment tracking. Pick the one that fits where the business is headed.</p>
+  <div class="cards" id="cards"></div>
+  <p class="foot">All three plans include 12 months free maintenance and domain setup</p>
+</div>
+<div id="v1" class="view"></div><div id="v2" class="view"></div><div id="v3" class="view"></div>
+
+<script>
+const chk='<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 8.5 6.5 12 13 4.5"/></svg>';
+const P=[{
+ n:1,tag:'Starter',name:'Showroom Website + WhatsApp Orders',price:220000,usd:'$155',wk:3,fee:8000,
+ blurb:'A clean online showroom of every smoothie, parfait, sandwich and small chop. Customers browse, build a cart, and send it straight to your WhatsApp to confirm and pay. No accounts, no database — simple and fast to launch.',
+ pay:[['Customer browses the menu','They see smoothies, parfaits, sandwiches and small chops by category, with photos and prices.'],['Items go into a cart','They pick quantities and add favourites to a running order.'],['Order summary is generated','The cart becomes a clean list with items, quantities and total.'],['WhatsApp opens with the order pre-filled','One tap sends the full order to your WhatsApp Business number, ready to confirm.'],['You confirm and the customer pays','You agree on pickup or delivery and payment the way you do today.']],
+ bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','55000'],['Frontend Development','Menu, cart, categories, mobile-first build','75000'],['WhatsApp Order Flow','Cart summary and pre-filled WhatsApp Business link','30000'],['Deployment and Domain','Hosting, domain setup, configuration','25000']],
+ extra:['Cart and WhatsApp order flow','Menu set up by the developer at launch (no admin panel)'],
+ pages:[['Home','Hero with the Smoothie Daddi mascot, bestsellers, opening hours and a clear order button.'],['Menu','Smoothies, parfaits, sandwiches and small chops, filterable by category.'],['Item Detail','Photo, description and an add-to-cart option for each item.'],['About','The Smoothie Daddi story — health, flavour and the Idi-Araba shop.'],['Location and Hours','Shop address, map, opening hours, pickup and delivery notes.'],['Contact','WhatsApp button, phone number and social links.']],
+ tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Vercel','Hosting'],['GitHub','Version control'],['WhatsApp link','Orders']],
+ tl:[['Week 1','Brand direction, mockups and menu layout approved.'],['Week 2','Build all pages, cart and WhatsApp flow.'],['Week 3','Testing, revisions, domain setup and go-live.']]
+},{
+ n:2,tag:'Growth',name:'Order Capture + Owner Dashboard',price:420000,usd:'$295',wk:5,fee:14000,
+ blurb:'Everything in Starter, plus a proper checkout. Customers enter their name and phone number when ordering, and every order lands in your email and a simple dashboard — so you can see total orders for the day, week or month at a glance.',
+ pay:[['Customer browses and builds a cart','Same easy browsing as the Starter plan, across all categories.'],['Checkout form','Customer enters their name, phone number and pickup or delivery choice.'],['Order is saved and emailed','The order is stored and a clean summary is sent straight to your email.'],['You see it on your dashboard','Every order appears with customer details, items and total — tracked by day, week and month.'],['You confirm and fulfil','You call or WhatsApp the customer to confirm, then prepare the order.']],
+ bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','65000'],['Frontend Development','Menu, cart, checkout form, mobile-first build','85000'],['Backend and Database','Order storage, customer details, totals by period','90000'],['Owner Dashboard','Order list, daily/weekly/monthly totals, simple filters','90000'],['Email Notifications','Instant order email to the owner on every checkout','40000'],['Deployment and Domain','Hosting, domain setup, configuration','30000']],
+ extra:['Checkout form (name and phone number)','Orders saved and emailed automatically','Owner dashboard with day, week and month totals'],
+ pages:null,
+ tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Supabase','Database'],['Vercel','Hosting'],['Resend / Nodemailer','Emails']],
+ tl:[['Week 1','Brand direction, mockups and menu layout approved.'],['Weeks 2 to 3','Build menu, cart, checkout and backend.'],['Week 4','Owner dashboard, email alerts and testing.'],['Week 5','Revisions, domain setup and go-live.']]
+},{
+ n:3,tag:'Complete',name:'Customer Accounts + Payment Tracking',price:680000,usd:'$480',wk:7,fee:18000,
+ blurb:'The full system. Customers sign up, order from their own dashboard, ask a chatbot about products, pay by bank transfer and mark payment as sent, then choose a pickup point. You confirm payment and track every order from your own dashboard.',
+ pay:[['Customer creates an account','Quick sign-up with name, phone and email, then logs in anytime.'],['Customer orders from their dashboard','They browse, add to cart and place an order from their account.'],['Chatbot answers product questions','Ingredients, sizes or availability — answered instantly while they shop.'],['Customer pays by transfer','Account details are shown to copy; the customer sends payment, then taps "I\\'ve sent the money."'],['Pickup point is chosen','Customer selects where to collect their order.'],['You confirm payment and fulfil','You verify the transfer on your dashboard, confirm it, and prepare the order for pickup.']],
+ bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','75000'],['Frontend Development','Menu, cart, customer dashboard, mobile-first build','100000'],['Accounts and Authentication','Sign up, login, customer profile and order history','80000'],['Backend and Database','Orders, payment status, pickup points, customer records','100000'],['Payment Confirmation Flow','Bank details display, "I\\'ve paid" marker, owner verification','90000'],['Product Chatbot','Answers customer questions about menu items','85000'],['Owner Dashboard','Order tracking, payment confirmation, totals by period','90000'],['Deployment and Domain','Hosting, domain setup, configuration','30000']],
+ extra:['Customer accounts with sign-up and login','Customer order dashboard and order history','Product chatbot for customer questions','Bank transfer payment with "I\\'ve paid" confirmation','Pickup point selection','Owner dashboard to confirm payments and track orders'],
+ pages:[['Home','Hero with the Smoothie Daddi mascot, bestsellers and a clear sign-up or order call to action.'],['Menu','Smoothies, parfaits, sandwiches and small chops, filterable by category, with the chatbot available throughout.'],['Account','Sign up, log in, and manage your profile and saved pickup points.'],['Customer Dashboard','Place new orders, view order history and track payment status.'],['Checkout and Payment','Bank details, "I\\'ve sent the money" confirmation, and pickup point choice.'],['Owner Dashboard','Confirm payments, track orders by day, week and month, view customer details.']],
+ tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Supabase','Database and auth'],['OpenAI API','Product chatbot'],['Vercel','Hosting'],['Resend / Nodemailer','Emails']],
+ tl:[['Week 1','Brand direction, mockups and page approval.'],['Weeks 2 to 3','Menu, cart, accounts and customer dashboard.'],['Weeks 4 to 5','Payment confirmation flow, pickup points and chatbot.'],['Week 6','Owner dashboard and order tracking.'],['Week 7','Testing, revisions, domain setup and go-live.']]
+}];
+const N=x=>'₦'+Number(x).toLocaleString('en-NG');
+const T=(t,k)=>`<section><div class="sh"><span class="num">${k}</span><h3>${t}</h3><hr></div>`;
+function build(p){
+ const base=['Custom 6-page branded website design','Mobile-first responsive layout','Photo-forward menu with categories','Smoothie Daddi mascot and brand styling throughout','Domain name setup and hosting deployment','12 months free maintenance','Up to 2 rounds of design revisions'];
+ const feats=[...p.extra,...base].map(f=>`<div class="f">${chk}<span>${f}</span></div>`).join('');
+ const terms=['A 50% deposit is required before work begins.','Up to 2 rounds of revisions are included in the agreed scope.','12 months of free maintenance starts on delivery and covers bug fixes, minor content updates and performance checks. Major new features are quoted separately.','Domain cost (about $15 per year) is the owner\'s responsibility from year 2.','The owner provides all content: menu photos, prices, descriptions and logo.'];
+ if(p.n==3)terms.push('The chatbot answers from a menu knowledge base the owner reviews and approves before launch.');
+ const dep=p.price/2;
+ return `<nav><b>Smoothie <span class="pop">Daddi</span></b><button class="ghost" onclick="show('home')">All proposals</button></nav>
+ <div class="hero"><p class="eyebrow">Proposal 0${p.n} · ${p.tag} Plan</p><h1 class="disp">Website Development<br><span class="pop">${p.name}</span></h1><p>${p.blurb}</p>
+ <div class="stats"><div><small>Investment</small><span>${N(p.price)}</span></div><div><small>Timeline</small><span>${p.wk} Weeks</span></div><div><small>Maintenance</small><span>12 Months Free</span></div><div><small>Domain</small><span>Included</span></div></div></div>
+ <main>
+ ${T('Introduction','01')}<p class="body">Smoothie Daddi serves health-conscious customers near LUTH with smoothies, fruity parfaits, sandwiches and small chops. Right now, orders happen through Instagram and WhatsApp. This website gives the brand a real home online — somewhere customers can browse the full menu, see what's available, and order with confidence.</p><p class="body">It's built to feel as fresh and friendly as the brand itself, and to make ordering easy whether it's a regular from OPH Complex or someone discovering Smoothie Daddi for the first time.</p></section>
+ ${T('Pages and Structure','02')}<div class="grid">${p.pages.map(([a,b],i)=>`<div class="box ${i==p.pages.length-1&&p.pages.length%2?'wide':''}"><h4>${a}</h4><p>${b}</p></div>`).join('')}</div></section>
+ ${T('How Ordering Works','03')}<div class="steps">${p.pay.map(([a,b],i)=>`<div class="step"><div class="dot">${i+1}</div><div><h4>${a}</h4><p>${b}</p></div></div>`).join('')}</div></section>
+ ${T('Technology Stack','04')}<p class="body">A modern, reliable stack that keeps pages fast and the site easy to maintain as the menu grows.</p><div class="chips">${p.tech.map(([a,b])=>`<div class="chip"><b>${a}</b><small>${b}</small></div>`).join('')}</div></section>
+ ${T('What is Included','05')}<div class="feats">${feats}</div></section>
+ ${T('Estimated Timeline','06')}<div class="tl">${p.tl.map(([a,b])=>`<div><b>${a}</b><p>${b}</p></div>`).join('')}</div></section>
+ ${T('Investment','07')}<div class="tbl">${p.bd.map(([a,b,c])=>`<div class="row"><b>${a}</b><span>${b}</span><em>${N(c)}</em></div>`).join('')}<div class="row free"><b>12 Months Maintenance</b><span>${N(p.fee)} x 12 months: fixes, content updates, monitoring</span><em><s>${N(p.fee*12)}</s><span class="fb">FREE</span></em></div><div class="total"><span>Total Investment · ${p.usd} USD</span><em>${N(p.price)}</em></div></div>
+ <div class="pb"><p class="eyebrow">Total Investment</p><div class="n disp pop" data-n="${p.price}">${N(p.price)}</div><p>${p.usd} USD · Maintenance worth ${N(p.fee*12)} included free</p><p style="color:var(--mango)">Domain setup included · ${p.wk} weeks delivery</p>
+ <div class="plan"><div><small>Deposit · 50%</small><b>${N(dep)}</b><small style="font-weight:400">Before work begins</small></div><div><small>Balance · 50%</small><b>${N(dep)}</b><small style="font-weight:400">Upon delivery</small></div></div></div></section>
+ ${T('Terms and Conditions','08')}<div class="terms">${terms.map(t=>`<div class="f">${chk}<span>${t}</span></div>`).join('')}</div></section>
+ ${T('Next Steps','09')}<p class="body" style="margin-bottom:22px">To proceed, confirm your chosen plan and make the initial deposit. Work begins right away. Questions before committing? Reach out anytime.</p><div class="contact"><div><small>Developer</small>David Ajibua</div><div><small>Email</small>davidajibua78@gmail.com</div><div><small>Phone and WhatsApp</small>07068634125</div><div><small>Date issued</small>October 14, 2026</div></div></section>
+ </main><footer>Smoothie Daddi · Website Proposal 0${p.n} · Prepared by David Ajibua · October 14, 2026</footer>`}
+document.getElementById('cards').innerHTML=P.map(p=>`<div class="pc" onclick="show('v${p.n}')"><span class="tag">${p.tag}</span><p class="eyebrow" style="margin-bottom:8px">Proposal 0${p.n}</p><h2 class="disp">${p.name}</h2><p>${p.blurb}</p><div class="price disp pop">${N(p.price)}</div><div class="usd">Approximately ${p.usd} USD · ${p.wk} Weeks</div><span class="btn">View proposal →</span></div>`).join('');
+P[1].pages=P[0].pages;
+P.forEach(p=>document.getElementById('v'+p.n).innerHTML=build(p));
+document.querySelectorAll('.pc').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
+const SEL='#home > *,.pc,.hero > *,.stats div,.sh,.body,.box,.step,.chip,.f,.tl div,.row,.total,.pb,.pb .plan div,.contact div';
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add('s');io.unobserve(t);setTimeout(()=>{t.classList.remove('rv','s');t.style.transitionDelay=''},1600)}}),{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+function prep(v){v.querySelectorAll(SEL).forEach(el=>{const i=[...el.parentNode.children].indexOf(el);el.classList.remove('s');el.classList.add('rv');el.style.transitionDelay=Math.min(i,6)*90+'ms';io.observe(el)})}
+function show(id,push=true){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById(id);v.classList.add('on');scrollTo(0,0);prep(v);if(push)history.pushState({id},'')}
+history.replaceState({id:'home'},'');prep(document.getElementById('home'));addEventListener('popstate',e=>show(e.state?e.state.id:'home',false));
+addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('prog').style.width=(scrollY/(h.scrollHeight-innerHeight||1)*100)+'%'},{passive:true});
+</script></body></html>
