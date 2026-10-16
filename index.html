@@ -1,102 +1,237 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFF4DE">
 <title>Smoothie Daddi | Website Proposal</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  color-scheme: dark;
-  --bg:#13100C;--bg2:#1B1510;--card:#201911;
-  --cream:#FFF8EC;--mango:#F4A627;--mango2:#FCC95B;--tangerine:#E8562E;--mint:#8FBF8A;
-  --mut:#B8A98F;--line:rgba(244,166,39,.20);--r:16px;
+  --paper:#FFF4DE;--card:#FFFCF4;--ink:#22160B;--mut:#6B5840;
+  --mango:#FFB627;--tang:#FF6B3D;--mint:#8ED6A8;--pink:#FFB3C1;
+  --acc:var(--mango);
+  --sh:5px 5px 0 var(--ink);
+  --r:22px;
 }
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-.disp{font-family:'Baloo 2',sans-serif}
-.pop{background:linear-gradient(100deg,var(--mango),var(--mango2),var(--mango));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
-#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--tangerine),var(--mango));z-index:200}
-.view{display:none;position:relative;z-index:1;min-height:100vh}.view.on{display:block;animation:in .6s cubic-bezier(.2,.7,.2,1)}
-@keyframes in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Bricolage Grotesque',system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:16px;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.22;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .55 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.mono{font-family:'DM Mono',monospace}
+a{color:inherit}
+#prog{position:fixed;top:0;left:0;height:4px;width:0;background:var(--tang);z-index:400;border-radius:0 4px 4px 0}
 
-/* blob accent */
-.blob{width:64px;height:64px;margin:22px auto;position:relative}
-.blob svg{width:100%;height:100%;animation:wob 5s ease-in-out infinite}
-@keyframes wob{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(8deg) scale(1.05)}}
+.view{display:none;min-height:100vh}
+.view.on{display:block;animation:fade .5s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.wrap{max-width:1040px;margin:auto;padding:0 20px}
 
-#home{padding:calc(48px + env(safe-area-inset-top)) 22px 60px;max-width:1080px;margin:auto;text-align:center}
-.eyebrow{font-size:13px;color:var(--mango);font-weight:600}
-.brand{font-size:clamp(44px,11vw,88px);font-weight:800;line-height:.95;margin:14px 0 8px}
-.sub{color:var(--mut);font-size:14px}
-.lead{max-width:540px;margin:22px auto 36px;color:#E9DFCB;font-weight:300;line-height:1.75;font-size:15px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
-.pc{position:relative;background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:22px;padding:28px 22px;cursor:pointer;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
-.pc::before{content:'';position:absolute;inset:0;background:radial-gradient(360px circle at var(--x,50%) var(--y,0),rgba(244,166,39,.18),transparent 60%);opacity:0;transition:.3s}
-.pc:hover{transform:translateY(-5px);border-color:var(--mango);box-shadow:0 20px 46px -22px rgba(244,166,39,.4)}.pc:hover::before{opacity:1}
-.tag{display:inline-block;font-size:11px;font-weight:700;padding:5px 13px;border-radius:99px;border:1px solid var(--line);color:var(--mango);margin-bottom:16px}
-.pc h2{font-family:'Baloo 2';font-size:23px;font-weight:700;margin-bottom:9px;line-height:1.2}.pc p{font-size:13px;color:var(--mut);line-height:1.65;margin-bottom:20px}
-.price{font-family:'Baloo 2';font-size:34px;font-weight:700}.usd{font-size:12px;color:var(--mut);margin:2px 0 18px}
-.btn{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;color:#1B1208;background:linear-gradient(100deg,var(--mango),var(--mango2));padding:11px 20px;border-radius:99px;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s}
-.btn:hover{transform:translateX(3px);box-shadow:0 8px 22px -8px var(--mango)}
-.foot{margin-top:32px;font-size:12.5px;color:var(--mut)}
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
 
-nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 20px 12px;background:rgba(19,16,12,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-nav b{font-family:'Baloo 2';font-size:19px;font-weight:700}
-.ghost{background:none;border:1px solid var(--line);color:var(--cream);font-size:12px;font-weight:600;padding:8px 14px;border-radius:99px;cursor:pointer;transition:.25s}.ghost:hover{border-color:var(--mango);color:var(--mango)}
-.hero{padding:60px 22px 46px;max-width:900px;margin:auto}
-.hero h1{font-family:'Baloo 2';font-size:clamp(34px,7.5vw,60px);font-weight:700;line-height:1.08;margin:14px 0 16px}
-.hero p{color:#E9DFCB;font-weight:300;line-height:1.8;max-width:600px;font-size:15px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:34px}
-.stats div{background:var(--bg2);padding:16px 12px}.stats small{display:block;font-size:10px;color:var(--mut);margin-bottom:6px;font-weight:600}.stats span{font-size:15px;font-weight:700;font-family:'Baloo 2'}
-main{max-width:900px;margin:auto;padding:16px 22px 90px}
-section{margin-bottom:64px}
-.sh{display:flex;align-items:center;gap:12px;margin-bottom:22px}.sh .num{font-family:'Baloo 2';color:var(--mango);font-size:14px;font-weight:700;background:var(--card);border:1px solid var(--line);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}.sh h3{font-family:'Baloo 2';font-size:27px;font-weight:700}.sh hr{flex:1;border:0;height:1px;background:var(--line)}
-.body{color:#E9DFCB;line-height:1.85;font-weight:300;font-size:14.5px;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:19px;transition:transform .25s,border-color .25s}.box:hover{transform:translateY(-3px);border-color:var(--mango)}
-.box h4{font-size:12px;letter-spacing:.02em;color:var(--mango);margin-bottom:7px;font-weight:700}.box p{font-size:13px;color:var(--mut);line-height:1.7}
-.wide{grid-column:1/-1}
-.steps{position:relative;padding-left:4px}.step{display:flex;gap:16px;position:relative;padding-bottom:24px}
-.step:not(:last-child)::after{content:'';position:absolute;left:16px;top:36px;bottom:0;width:1px;background:var(--line)}
-.dot{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--mango);display:grid;place-items:center;color:var(--mango);font-size:13px;font-weight:700;background:var(--bg);z-index:1;font-family:'Baloo 2'}
-.step h4{font-size:14.5px;margin:5px 0 4px;font-weight:700}.step p{font-size:13px;color:var(--mut);line-height:1.7}
-.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.chip{text-align:center;padding:13px 8px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.chip b{display:block;font-size:12.5px;font-weight:700}.chip small{color:var(--mut);font-size:11px}
-.feats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.f{display:flex;gap:10px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;line-height:1.5;color:#EDE4D3}.f svg{flex:none;width:16px;margin-top:2px;stroke:var(--mango)}
-.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.tl div{padding:17px;border-radius:12px;background:var(--card);border:1px solid var(--line);border-top:2px solid var(--mango)}.tl b{display:block;font-size:11px;color:var(--mango);margin-bottom:7px;font-weight:700}.tl p{font-size:12.5px;color:var(--mut);line-height:1.6}
-.tbl{border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.row{display:grid;grid-template-columns:1.1fr 2fr auto;gap:16px;padding:15px 18px;border-bottom:1px solid var(--line);align-items:center;font-size:13px}
-.row:nth-child(odd){background:var(--bg2)}.row b{font-weight:700}.row span{color:var(--mut);line-height:1.5}.row em{font-style:normal;color:var(--mango);font-weight:700;text-align:right}
-.row.free{background:rgba(244,166,39,.08)}.row s{color:var(--mut);margin-right:6px}.row .fb{background:#3E8E52;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:99px}
-.total{display:flex;justify-content:space-between;padding:16px 18px;background:#000;font-weight:700}.total em{color:var(--mango);font-style:normal}
-.pb{margin-top:24px;text-align:center;padding:40px 22px;border-radius:24px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 120%,rgba(232,86,46,.22),transparent 65%),var(--bg2)}
-.pb .n{font-family:'Baloo 2';font-size:clamp(42px,9vw,70px);font-weight:700;line-height:1}.pb p{color:var(--mut);font-size:13px;margin-top:8px}
-.plan{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;margin:26px auto 0}.plan div{padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}.plan small{font-size:10px;color:var(--mut);font-weight:600}.plan b{display:block;font-size:24px;font-family:'Baloo 2';margin:4px 0}
-.terms{display:grid;gap:10px}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:26px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}.contact small{display:block;font-size:10px;color:var(--mut);margin-bottom:4px;font-weight:600}
-footer{text-align:center;padding:26px;font-size:11px;color:#7A6B50;border-top:1px solid var(--line)}
-.rv{opacity:0;transform:translateY(26px) scale(.98);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.rv.s{opacity:1;transform:none}
-@media(max-width:900px){.cards{grid-template-columns:1fr}}
-@media(max-width:720px){.cards,.grid,.feats,.contact{grid-template-columns:1fr}.chips{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr auto}.row span{grid-column:1/-1;order:3}.hero{padding-top:40px}}
+/* ---------- HOME ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;padding:calc(16px + env(safe-area-inset-top)) 20px 0;max-width:1040px;margin:auto;font-size:12px}
+.top .mono{letter-spacing:.04em}
+.pill{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--ink);border-radius:99px;padding:6px 13px;background:var(--card);font-weight:600;font-size:12px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--tang);display:block;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+
+.hero{position:relative;padding:34px 20px 50px;max-width:1040px;margin:auto}
+.kick{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.mark{font-size:clamp(64px,21vw,190px);font-weight:800;line-height:.82;letter-spacing:-.055em;margin:16px 0 18px}
+.mark em{font-size:1.04em;letter-spacing:-.03em;position:relative;display:inline-block;color:var(--tang)}
+.mark em::after{content:'';position:absolute;left:-2%;right:-2%;bottom:.04em;height:.11em;background:var(--mango);z-index:-1;border-radius:99px;transform:rotate(-1.5deg)}
+.addr{display:flex;gap:8px;align-items:center;font-weight:500;color:var(--mut);font-size:14px;margin-bottom:18px}
+.lead{max-width:520px;font-size:clamp(18px,4.6vw,23px);line-height:1.4;font-weight:450}
+.hero .cup{position:absolute;right:6px;top:8px;width:clamp(86px,22vw,210px);transform:rotate(9deg);animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(3deg) translateY(-10px)}}
+.badge{position:absolute;right:calc(clamp(86px,22vw,210px) - 30px);top:clamp(118px,27vw,250px);width:clamp(78px,18vw,128px);animation:spin 22s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.marq{background:var(--ink);color:var(--mango);border-block:2px solid var(--ink);overflow:hidden;white-space:nowrap;transform:rotate(-1.4deg);margin:14px -10px 0}
+.marq div{display:inline-block;padding:13px 0;font-weight:700;font-size:20px;animation:mq 26s linear infinite;letter-spacing:-.01em}
+.marq span{margin:0 18px}.marq b{color:var(--cream,#FFF4DE);font-weight:400;font-family:'Instrument Serif';font-style:italic}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.plans{padding:70px 20px 20px;max-width:1040px;margin:auto}
+.h2{font-size:clamp(34px,9vw,58px);font-weight:800;line-height:.95;letter-spacing:-.04em;margin-bottom:8px}
+.sub2{color:var(--mut);margin-bottom:28px;font-size:15px}
+.cards{display:grid;gap:22px}
+.pc{position:relative;display:flex;flex-direction:column;background:var(--acc);border:2px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);padding:24px 22px 22px;text-decoration:none;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.pc:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.pc:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.pc .big{position:absolute;right:-8px;top:-18px;font-size:150px;font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(34,22,11,.22);pointer-events:none}
+.pc .tg{align-self:flex-start;background:var(--card);border:2px solid var(--ink);border-radius:99px;padding:4px 13px;font-size:12px;font-weight:700;margin-bottom:18px;position:relative}
+.pc h3{font-size:27px;line-height:1.02;font-weight:800;letter-spacing:-.03em;margin-bottom:12px;position:relative;max-width:88%}
+.pc p.b{font-size:14.5px;line-height:1.55;margin-bottom:16px;color:rgba(34,22,11,.82)}
+.pc ul{list-style:none;display:grid;gap:7px;margin-bottom:20px;font-size:13.5px;font-weight:600}
+.pc li{display:flex;gap:9px;align-items:flex-start}
+.pc li::before{content:'';flex:none;width:17px;height:17px;border-radius:50%;background:var(--ink) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23FFF4DE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 8.5 7 11.5 12 5'/></svg>") center/11px no-repeat;margin-top:1px}
+.pc .foot{margin-top:auto;border-top:2px dashed rgba(34,22,11,.45);padding-top:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.pc .pr{font-size:40px;font-weight:800;letter-spacing:-.045em;line-height:1}
+.pc .us{font-size:12.5px;font-weight:500;margin-top:5px;color:rgba(34,22,11,.75)}
+.go{flex:none;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;transition:transform .25s}
+.pc:hover .go{transform:rotate(-45deg) scale(1.06)}
+.go svg{width:22px}
+
+.cmp{padding:60px 20px 20px;max-width:1040px;margin:auto}
+.tab{background:var(--card);border:2px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;font-size:13px}
+.tr{display:grid;grid-template-columns:1.5fr repeat(3,.75fr);align-items:center}
+.tr>div{padding:12px 10px;border-bottom:1.5px solid rgba(34,22,11,.14);min-height:46px;display:flex;align-items:center}
+.tr>div:not(:first-child){justify-content:center;text-align:center;border-left:1.5px solid rgba(34,22,11,.14);font-weight:700}
+.tr.hd>div{background:var(--ink);color:var(--paper);font-weight:700;font-size:11.5px;border-color:rgba(255,255,255,.14)}
+.tr.hd>div:nth-child(2){background:var(--mango);color:var(--ink)}.tr.hd>div:nth-child(3){background:var(--pink);color:var(--ink)}.tr.hd>div:nth-child(4){background:var(--mint);color:var(--ink)}
+.tr:last-child>div{border-bottom:0}
+.tr .y{width:22px;height:22px;border-radius:50%;background:var(--ink) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23FFF4DE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 8.5 7 11.5 12 5'/></svg>") center/13px no-repeat}
+.tr .x{color:rgba(34,22,11,.25)}
+.tr.pr>div{background:rgba(255,182,39,.2);font-weight:800;font-size:13px}
+.homefoot{text-align:center;padding:44px 20px 70px;font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--mut)}
+
+/* ---------- PLAN VIEW ---------- */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,244,222,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:2px solid var(--ink);padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+nav .in{max-width:1040px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.back{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:700;font-size:13px;border:2px solid var(--ink);background:var(--card);border-radius:99px;padding:7px 14px 7px 10px;transition:.2s}
+.back:active{transform:scale(.95)}.back svg{width:16px}
+.sw{display:flex;gap:7px}
+.sw a{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;text-decoration:none;font-family:'DM Mono';font-size:12px;font-weight:500;background:var(--card);transition:.2s}
+.sw a.cur{background:var(--ink);color:var(--paper)}
+
+.ph{position:relative;background:var(--acc);border-bottom:2px solid var(--ink);overflow:hidden}
+.ph .wrap{padding-top:44px;padding-bottom:56px;position:relative}
+.ph .num{position:absolute;right:-6px;top:-4px;font-size:clamp(150px,44vw,360px);font-weight:800;letter-spacing:-.07em;line-height:.9;color:transparent;-webkit-text-stroke:2px rgba(34,22,11,.2);pointer-events:none}
+.ph .kick{color:rgba(34,22,11,.75);position:relative}
+.ph h1{font-size:clamp(38px,10.5vw,84px);font-weight:800;line-height:.94;letter-spacing:-.05em;margin:14px 0 18px;max-width:780px;position:relative}
+.ph p.bl{max-width:560px;font-size:clamp(16px,4vw,19px);line-height:1.5;font-weight:450;position:relative}
+.ph .cup{position:absolute;right:14px;bottom:-22px;width:clamp(80px,19vw,170px);transform:rotate(-9deg);animation:bob2 5s ease-in-out infinite}
+@keyframes bob2{50%{transform:rotate(-3deg) translateY(-8px)}}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px;position:relative;max-width:640px}
+.stats div{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:13px 15px;box-shadow:3px 3px 0 var(--ink)}
+.stats small{display:block;font-family:'DM Mono';font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}
+.stats span{font-size:19px;font-weight:800;letter-spacing:-.03em}
+
+main{max-width:1040px;margin:auto;padding:20px 20px 150px}
+.sec{padding-top:62px}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.sh .n{flex:none;font-family:'DM Mono';font-size:12px;font-weight:500;background:var(--ink);color:var(--paper);border-radius:99px;padding:5px 11px}
+.sh h3{font-size:clamp(30px,8vw,48px);font-weight:800;letter-spacing:-.045em;line-height:.95}
+.sh h3 em{font-size:1.08em;color:var(--tang);letter-spacing:-.02em}
+.sh::after{content:'';flex:1;min-width:20px;height:0;border-top:2px dashed rgba(34,22,11,.35)}
+
+.intro p.l{font-family:'Instrument Serif',serif;font-size:clamp(25px,6.4vw,38px);line-height:1.18;letter-spacing:-.01em;margin-bottom:20px;max-width:760px}
+.intro p.l mark{background:linear-gradient(transparent 58%,var(--acc) 58%);color:inherit;padding:0 2px}
+.intro p.s{color:var(--mut);max-width:560px;font-size:15.5px;line-height:1.7}
+
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+.box{border:2px solid var(--ink);border-radius:var(--r);padding:20px;background:var(--card);box-shadow:4px 4px 0 var(--ink);transition:transform .25s}
+.box:nth-child(3n+1){background:color-mix(in srgb,var(--acc) 38%,var(--card))}
+.box:nth-child(3n+2){background:var(--card)}
+.box:nth-child(3n){background:color-mix(in srgb,var(--acc) 16%,var(--card))}
+.box:hover{transform:translate(-2px,-2px) rotate(-.4deg)}
+.box .pn{font-family:'DM Mono';font-size:11px;color:var(--mut);letter-spacing:.06em}
+.box h4{font-size:24px;font-weight:800;letter-spacing:-.035em;margin:5px 0 7px}
+.box p{font-size:14px;line-height:1.6;color:rgba(34,22,11,.78)}
+
+.steps{display:grid;gap:0;counter-reset:s}
+.step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:18px}
+.step:not(:last-child)::before{content:'';position:absolute;left:22px;top:48px;bottom:-2px;border-left:2px dashed rgba(34,22,11,.4)}
+.dot{width:46px;height:46px;border-radius:50%;background:var(--acc);border:2px solid var(--ink);display:grid;place-items:center;font-weight:800;font-size:18px;box-shadow:2px 2px 0 var(--ink);z-index:1}
+.step .c{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:14px 16px}
+.step h4{font-size:17.5px;font-weight:800;letter-spacing:-.02em;margin-bottom:3px}
+.step p{font-size:14px;color:var(--mut);line-height:1.6}
+
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{border:2px solid var(--ink);border-radius:16px;background:var(--card);padding:10px 16px;box-shadow:3px 3px 0 var(--ink);transition:transform .25s}
+.chip:nth-child(odd){transform:rotate(-1.6deg)}.chip:nth-child(even){transform:rotate(1.2deg);background:color-mix(in srgb,var(--acc) 40%,var(--card))}
+.chip:hover{transform:rotate(0) translateY(-3px)}
+.chip b{display:block;font-size:16px;font-weight:800;letter-spacing:-.02em}.chip small{font-family:'DM Mono';font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.techn{color:var(--mut);margin-bottom:20px;max-width:560px;font-size:15px}
+
+.feats{display:grid;grid-template-columns:1fr;gap:10px}
+.f{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:2px solid var(--ink);border-radius:16px;background:var(--card);font-size:14.5px;font-weight:550;line-height:1.45}
+.f::before{content:'';flex:none;width:22px;height:22px;border-radius:50%;background:var(--acc) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2322160B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 8.5 7 11.5 12 5'/></svg>") center/13px no-repeat;border:2px solid var(--ink)}
+.f.hl{background:color-mix(in srgb,var(--acc) 30%,var(--card))}
+
+.tl{display:grid;gap:14px;grid-template-columns:1fr}
+.tl div{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:18px 18px 16px;overflow:hidden}
+.tl div::before{content:'';position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--acc);border-right:2px solid var(--ink)}
+.tl b{display:block;padding-left:10px;font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:28px;line-height:1;margin-bottom:6px}
+.tl p{padding-left:10px;font-size:14px;color:var(--mut);line-height:1.55}
+
+/* receipt */
+.ticket{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);max-width:680px}
+.t-top{display:flex;justify-content:space-between;gap:10px;padding:16px 20px;border-bottom:2px dashed rgba(34,22,11,.4);font-family:'DM Mono';font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:14px 20px;border-bottom:1.5px solid rgba(34,22,11,.12)}
+.row b{font-size:16px;font-weight:800;letter-spacing:-.02em}.row em.p{font-family:'DM Mono',monospace;font-style:normal;font-weight:500;font-size:14.5px;text-align:right;align-self:start}
+.row span{grid-column:1/-1;font-size:13px;color:var(--mut);line-height:1.5}
+.row.free{background:color-mix(in srgb,var(--mint) 35%,var(--card))}
+.row.free s{color:var(--mut);margin-right:6px;font-family:'DM Mono';font-size:12.5px}
+.fb{display:inline-block;background:var(--ink);color:var(--mint);font-family:'DM Mono';font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:99px;transform:rotate(-4deg);letter-spacing:.06em}
+.perf{position:relative;border-top:2px dashed var(--ink);margin-top:8px}
+.perf::before,.perf::after{content:'';position:absolute;top:-14px;width:26px;height:26px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.perf::before{left:-15px;clip-path:inset(0 0 0 50%)}.perf::after{right:-15px;clip-path:inset(0 50% 0 0)}
+.tot{padding:22px 20px 24px}
+.tot small{font-family:'DM Mono';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.tot .n{font-size:clamp(46px,14vw,76px);font-weight:800;letter-spacing:-.06em;line-height:1;margin:8px 0 6px;display:inline-block;background:linear-gradient(transparent 62%,var(--acc) 62%)}
+.tot p{font-size:13.5px;color:var(--mut)}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;max-width:680px}
+.plan div{padding:16px;border:2px solid var(--ink);border-radius:18px;background:var(--acc);box-shadow:3px 3px 0 var(--ink)}
+.plan div+div{background:var(--card)}
+.plan small{font-family:'DM Mono';font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;display:block}
+.plan b{display:block;font-size:clamp(20px,6vw,28px);font-weight:800;letter-spacing:-.04em;margin:4px 0}
+.plan span{font-size:12px;color:rgba(34,22,11,.7)}
+
+.terms{display:grid;gap:10px;counter-reset:t;max-width:760px}
+.terms .t{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 16px;border:2px solid var(--ink);border-radius:16px;background:var(--card);font-size:14.5px;line-height:1.55;counter-increment:t}
+.terms .t::before{content:counter(t,decimal-leading-zero);font-family:'DM Mono';font-size:12px;color:var(--tang);font-weight:500;padding-top:2px}
+
+.cta{background:var(--ink);color:var(--paper);border-radius:28px;padding:34px 22px 26px;position:relative;overflow:hidden}
+.cta h3{font-size:clamp(38px,11vw,72px);font-weight:800;letter-spacing:-.05em;line-height:.92;margin-bottom:12px}.cta h3 em{color:var(--mango)}
+.cta p.s{color:rgba(255,244,222,.75);max-width:480px;font-size:15.5px;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:800;font-size:15px;padding:14px 22px;border-radius:99px;border:2px solid var(--paper);transition:transform .2s}
+.btn:active{transform:scale(.96)}.btn.m{background:var(--mint);color:var(--ink);border-color:var(--mint)}.btn.o{color:var(--paper)}
+.btn svg{width:18px}
+.ci{display:grid;gap:16px;grid-template-columns:1fr 1fr;border-top:2px dashed rgba(255,244,222,.3);padding-top:20px}
+.ci small{display:block;font-family:'DM Mono';font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mango);margin-bottom:3px}
+.ci div{font-size:14.5px;font-weight:600;word-break:break-word}.ci .w{grid-column:1/-1}
+footer{text-align:center;padding:30px 20px 10px;font-family:'DM Mono';font-size:11px;color:var(--mut);letter-spacing:.04em}
+
+/* sticky bar */
+#bar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translate(-50%,140%);width:calc(100% - 24px);max-width:540px;z-index:200;background:var(--ink);color:var(--paper);border-radius:99px;padding:8px 8px 8px 22px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 12px 30px -10px rgba(34,22,11,.6);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+#bar.show{transform:translate(-50%,0)}
+#bar small{display:block;font-family:'DM Mono';font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--mango)}
+#bar b{font-size:19px;font-weight:800;letter-spacing:-.03em}
+#bar a{background:var(--acc);color:var(--ink);text-decoration:none;font-weight:800;font-size:14px;border-radius:99px;padding:13px 20px;white-space:nowrap}
+
+@media(min-width:720px){
+  .grid{grid-template-columns:1fr 1fr}.feats{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:repeat(4,1fr);max-width:none}
+  .tl{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .ci{grid-template-columns:repeat(4,1fr)}.ci .w{grid-column:auto}
+  .tr{font-size:14px}.tr>div{padding:14px}
+  main{padding-bottom:140px}
+}
+@media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}.pc:nth-child(2){margin-top:26px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style></head><body>
 <div id="prog"></div>
 
-<div id="home" class="view on">
-  <div class="blob"><svg viewBox="0 0 64 64"><path d="M32 4c14 0 24 11 24 25S46 56 32 60C18 56 8 43 8 29S18 4 32 4z" fill="var(--mango)"/><circle cx="24" cy="26" r="3" fill="#1B1208"/><circle cx="40" cy="26" r="3" fill="#1B1208"/><path d="M22 36c5 5 15 5 20 0" stroke="#1B1208" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
-  <p class="eyebrow">Website Development Proposal</p>
-  <h1 class="brand disp">Smoothie <span class="pop">Daddi</span></h1>
-  <p class="sub">Shop 6, OPH Complex, LUTH · Idi-Araba, Lagos</p>
-  <p class="lead">Three ways to take Smoothie Daddi online — from a simple WhatsApp-order showroom to a full ordering system with accounts and payment tracking. Pick the one that fits where the business is headed.</p>
-  <div class="cards" id="cards"></div>
-  <p class="foot">All three plans include 12 months free maintenance and domain setup</p>
-</div>
+<div id="home" class="view on"></div>
 <div id="v1" class="view"></div><div id="v2" class="view"></div><div id="v3" class="view"></div>
+<div id="bar"></div>
 
 <script>
-const chk='<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 8.5 6.5 12 13 4.5"/></svg>';
+const CUP=(c='#FFB627')=>`<svg class="cup" viewBox="0 0 200 290" aria-hidden="true"><g stroke="#22160B" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><path d="M118 16 L134 74" stroke-width="18"/><path d="M118 16 L134 74" stroke="#FF6B3D" stroke-width="7"/><path d="M34 84 H166 L150 252 Q148 270 130 270 H70 Q52 270 50 252 Z" fill="#FFFCF4"/><path d="M41 158 H159 L150 252 Q148 270 130 270 H70 Q52 270 50 252 Z" fill="${c}"/><path d="M24 70 Q24 60 34 60 H166 Q176 60 176 70 V84 H24 Z" fill="#8ED6A8"/><path d="M62 108 q8 -10 16 0" fill="none" stroke-width="5" opacity=".5"/></g><circle cx="82" cy="204" r="6.5" fill="#22160B"/><circle cx="118" cy="204" r="6.5" fill="#22160B"/><circle cx="83.5" cy="202" r="2" fill="#fff"/><circle cx="119.5" cy="202" r="2" fill="#fff"/><path d="M84 222 Q100 240 116 222" fill="none" stroke="#22160B" stroke-width="5" stroke-linecap="round"/><circle cx="67" cy="220" r="8" fill="#FF8FA3" opacity=".85"/><circle cx="133" cy="220" r="8" fill="#FF8FA3" opacity=".85"/><path d="M168 118 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z" fill="#22160B"/></svg>`;
+const BADGE=`<svg class="badge" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="cp" d="M60 60 m-45 0 a45 45 0 1 1 90 0 a45 45 0 1 1 -90 0"/></defs><circle cx="60" cy="60" r="58" fill="#FFB627" stroke="#22160B" stroke-width="2.5"/><text font-family="DM Mono,monospace" font-size="9.6" font-weight="500" fill="#22160B"><textPath href="#cp" textLength="278" lengthAdjust="spacing">WEBSITE PROPOSAL • LUTH • LAGOS • 2026 • </textPath></text><circle cx="60" cy="60" r="21" fill="#22160B"/><text x="60" y="68" text-anchor="middle" font-size="24" fill="#FFB627">✺</text></svg>`;
+const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+const WA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.4-4.3A8.5 8.5 0 1 1 8.300 18.700z"/><path d="M9 9.500c.5 2.200 2.300 4 4.500 4.500l1.300-1.300-2-1-.8.8c-.8-.4-1.500-1.100-1.900-1.900l.8-.8-1-2z" fill="currentColor" stroke="none"/></svg>';
+
 const P=[{
- n:1,tag:'Starter',name:'Showroom Website + WhatsApp Orders',price:220000,usd:'$155',wk:3,fee:8000,
+ n:1,acc:'#FFB627',tag:'Starter',name:'Showroom Website + WhatsApp Orders',price:220000,usd:'$155',wk:3,fee:8000,
  blurb:'A clean online showroom of every smoothie, parfait, sandwich and small chop. Customers browse, build a cart, and send it straight to your WhatsApp to confirm and pay. No accounts, no database — simple and fast to launch.',
  pay:[['Customer browses the menu','They see smoothies, parfaits, sandwiches and small chops by category, with photos and prices.'],['Items go into a cart','They pick quantities and add favourites to a running order.'],['Order summary is generated','The cart becomes a clean list with items, quantities and total.'],['WhatsApp opens with the order pre-filled','One tap sends the full order to your WhatsApp Business number, ready to confirm.'],['You confirm and the customer pays','You agree on pickup or delivery and payment the way you do today.']],
  bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','55000'],['Frontend Development','Menu, cart, categories, mobile-first build','75000'],['WhatsApp Order Flow','Cart summary and pre-filled WhatsApp Business link','30000'],['Deployment and Domain','Hosting, domain setup, configuration','25000']],
@@ -105,7 +240,7 @@ const P=[{
  tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Vercel','Hosting'],['GitHub','Version control'],['WhatsApp link','Orders']],
  tl:[['Week 1','Brand direction, mockups and menu layout approved.'],['Week 2','Build all pages, cart and WhatsApp flow.'],['Week 3','Testing, revisions, domain setup and go-live.']]
 },{
- n:2,tag:'Growth',name:'Order Capture + Owner Dashboard',price:420000,usd:'$295',wk:5,fee:14000,
+ n:2,acc:'#FFB3C1',tag:'Growth',name:'Order Capture + Owner Dashboard',price:420000,usd:'$295',wk:5,fee:14000,
  blurb:'Everything in Starter, plus a proper checkout. Customers enter their name and phone number when ordering, and every order lands in your email and a simple dashboard — so you can see total orders for the day, week or month at a glance.',
  pay:[['Customer browses and builds a cart','Same easy browsing as the Starter plan, across all categories.'],['Checkout form','Customer enters their name, phone number and pickup or delivery choice.'],['Order is saved and emailed','The order is stored and a clean summary is sent straight to your email.'],['You see it on your dashboard','Every order appears with customer details, items and total — tracked by day, week and month.'],['You confirm and fulfil','You call or WhatsApp the customer to confirm, then prepare the order.']],
  bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','65000'],['Frontend Development','Menu, cart, checkout form, mobile-first build','85000'],['Backend and Database','Order storage, customer details, totals by period','90000'],['Owner Dashboard','Order list, daily/weekly/monthly totals, simple filters','90000'],['Email Notifications','Instant order email to the owner on every checkout','40000'],['Deployment and Domain','Hosting, domain setup, configuration','30000']],
@@ -114,7 +249,7 @@ const P=[{
  tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Supabase','Database'],['Vercel','Hosting'],['Resend / Nodemailer','Emails']],
  tl:[['Week 1','Brand direction, mockups and menu layout approved.'],['Weeks 2 to 3','Build menu, cart, checkout and backend.'],['Week 4','Owner dashboard, email alerts and testing.'],['Week 5','Revisions, domain setup and go-live.']]
 },{
- n:3,tag:'Complete',name:'Customer Accounts + Payment Tracking',price:680000,usd:'$480',wk:7,fee:18000,
+ n:3,acc:'#8ED6A8',tag:'Complete',name:'Customer Accounts + Payment Tracking',price:680000,usd:'$480',wk:7,fee:18000,
  blurb:'The full system. Customers sign up, order from their own dashboard, ask a chatbot about products, pay by bank transfer and mark payment as sent, then choose a pickup point. You confirm payment and track every order from your own dashboard.',
  pay:[['Customer creates an account','Quick sign-up with name, phone and email, then logs in anytime.'],['Customer orders from their dashboard','They browse, add to cart and place an order from their account.'],['Chatbot answers product questions','Ingredients, sizes or availability — answered instantly while they shop.'],['Customer pays by transfer','Account details are shown to copy; the customer sends payment, then taps "I have sent the money."'],['Pickup point is chosen','Customer selects where to collect their order.'],['You confirm payment and fulfil','You verify the transfer on your dashboard, confirm it, and prepare the order for pickup.']],
  bd:[['UI/UX Design','Brand look, wireframes, all page designs, mobile-first','75000'],['Frontend Development','Menu, cart, customer dashboard, mobile-first build','100000'],['Accounts and Authentication','Sign up, login, customer profile and order history','80000'],['Backend and Database','Orders, payment status, pickup points, customer records','100000'],['Payment Confirmation Flow','Bank details display, "I have paid" marker, owner verification','90000'],['Product Chatbot','Answers customer questions about menu items','85000'],['Owner Dashboard','Order tracking, payment confirmation, totals by period','90000'],['Deployment and Domain','Hosting, domain setup, configuration','30000']],
@@ -123,38 +258,68 @@ const P=[{
  tech:[['Next.js','Framework'],['TypeScript','Language'],['Tailwind CSS','Styling'],['Supabase','Database and auth'],['OpenAI API','Product chatbot'],['Vercel','Hosting'],['Resend / Nodemailer','Emails']],
  tl:[['Week 1','Brand direction, mockups and page approval.'],['Weeks 2 to 3','Menu, cart, accounts and customer dashboard.'],['Weeks 4 to 5','Payment confirmation flow, pickup points and chatbot.'],['Week 6','Owner dashboard and order tracking.'],['Week 7','Testing, revisions, domain setup and go-live.']]
 }];
+P[1].pages=P[0].pages;
+
+const CMP=[['Online menu and cart',1,1,1],['Checkout (name and phone)',0,1,1],['Orders saved and emailed',0,1,1],['Owner dashboard',0,1,1],['Customer accounts',0,0,1],['Product chatbot',0,0,1],['Bank transfer tracking',0,0,1],['Pickup point choice',0,0,1],['Delivery','3 wks','5 wks','7 wks']];
+
 const N=x=>'₦'+Number(x).toLocaleString('en-NG');
-const T=(t,k)=>`<section><div class="sh"><span class="num">${k}</span><h3>${t}</h3><hr></div>`;
+const H=t=>{const w=t.split(' ');if(w.length<2)return t;const l=w.pop();return w.join(' ')+' <em>'+l+'</em>'};
+const S=(n,t,html,cls='')=>`<section class="sec ${cls}"><header class="sh rv"><span class="n">${n}</span><h3>${H(t)}</h3></header>${html}</section>`;
+const PHONE='2347068634125';
+const wa=p=>`https://wa.me/${PHONE}?text=${encodeURIComponent(`Hi David, I'd like to go ahead with the ${p.tag} plan (Proposal 0${p.n}) for Smoothie Daddi.`)}`;
+
+function home(){
+ const items=['Smoothies','Parfaits','Sandwiches','Small chops'];
+ const mq=Array(8).fill(0).map(()=>items.map(i=>`<span>${i}</span><b>✺</b>`).join('')).join('');
+ const cards=P.map(p=>`<a class="pc rv" href="#${p.n}" style="--acc:${p.acc}"><span class="big">0${p.n}</span><span class="tg">${p.tag}</span><h3>${p.name}</h3><p class="b">${p.blurb.split('. ')[0].replace(/\.$/,'')}.</p><ul>${p.extra.slice(0,3).map(e=>`<li>${e}</li>`).join('')}</ul><div class="foot"><div><div class="pr">${N(p.price)}</div><div class="us">≈ ${p.usd} USD · ${p.wk} weeks</div></div><span class="go">${ARROW}</span></div></a>`).join('');
+ const cell=v=>v===1?'<span class="y"></span>':v===0?'<span class="x">—</span>':v;
+ const tbl=`<div class="tab rv"><div class="tr hd"><div>What you get</div><div>Starter</div><div>Growth</div><div>Complete</div></div>${CMP.map(r=>`<div class="tr"><div>${r[0]}</div>${r.slice(1).map(v=>`<div>${cell(v)}</div>`).join('')}</div>`).join('')}<div class="tr pr"><div>Investment</div>${P.map(p=>`<div>${N(p.price)}</div>`).join('')}</div></div>`;
+ return `<div class="top"><span class="pill"><i></i>Proposal · Oct 2026</span><span class="mono">By David Ajibua</span></div>
+ <div class="hero">${CUP()}${BADGE}<p class="kick">Website development proposal</p><h1 class="mark">Smoothie <em>Daddi</em></h1><p class="addr">📍 Shop 6, OPH Complex, LUTH · Idi-Araba, Lagos</p><p class="lead">Three ways to take Smoothie Daddi online — from a simple WhatsApp-order showroom to a full ordering system with accounts and payment tracking. Pick the one that fits where the business is headed.</p></div>
+ <div class="marq"><div>${mq}</div></div>
+ <section class="plans"><h2 class="h2 rv">Pick your <em>plan</em></h2><p class="sub2 rv">Tap a card to see the full proposal.</p><div class="cards">${cards}</div></section>
+ <section class="cmp"><h2 class="h2 rv">Side by <em>side</em></h2><p class="sub2 rv">Quick comparison of what each plan covers.</p>${tbl}</section>
+ <p class="homefoot rv">All three plans include 12 months free maintenance and domain setup.</p>`;
+}
+
 function build(p){
  const base=['Custom 6-page branded website design','Mobile-first responsive layout','Photo-forward menu with categories','Smoothie Daddi mascot and brand styling throughout','Domain name setup and hosting deployment','12 months free maintenance','Up to 2 rounds of design revisions'];
- const feats=[...p.extra,...base].map(f=>`<div class="f">${chk}<span>${f}</span></div>`).join('');
+ const feats=[...p.extra.map(f=>[f,1]),...base.map(f=>[f,0])].map(([f,h])=>`<div class="f rv ${h?'hl':''}"><span>${f}</span></div>`).join('');
  const terms=['A 50% deposit is required before work begins.','Up to 2 rounds of revisions are included in the agreed scope.','12 months of free maintenance starts on delivery and covers bug fixes, minor content updates and performance checks. Major new features are quoted separately.','Domain cost (about $15 per year) is the owner\'s responsibility from year 2.','The owner provides all content: menu photos, prices, descriptions and logo.'];
  if(p.n==3)terms.push('The chatbot answers from a menu knowledge base the owner reviews and approves before launch.');
  const dep=p.price/2;
- return `<nav><b>Smoothie <span class="pop">Daddi</span></b><button class="ghost" onclick="show('home')">All proposals</button></nav>
- <div class="hero"><p class="eyebrow">Proposal 0${p.n} · ${p.tag} Plan</p><h1 class="disp">Website Development<br><span class="pop">${p.name}</span></h1><p>${p.blurb}</p>
- <div class="stats"><div><small>Investment</small><span>${N(p.price)}</span></div><div><small>Timeline</small><span>${p.wk} Weeks</span></div><div><small>Maintenance</small><span>12 Months Free</span></div><div><small>Domain</small><span>Included</span></div></div></div>
+ const sw=P.map(q=>`<a href="#${q.n}" class="${q.n==p.n?'cur':''}" aria-label="Proposal ${q.n}">0${q.n}</a>`).join('');
+ return `<nav><div class="in"><a class="back" href="#home">${BACK}All plans</a><div class="sw">${sw}</div></div></nav>
+ <header class="ph"><div class="wrap"><span class="num">0${p.n}</span><p class="kick">Proposal 0${p.n} · ${p.tag} plan</p><h1>${p.name.replace(' + ',' <em>+</em> ')}</h1><p class="bl">${p.blurb}</p>${CUP('#FFFCF4')}
+ <div class="stats"><div><small>Investment</small><span>${N(p.price)}</span></div><div><small>Timeline</small><span>${p.wk} weeks</span></div><div><small>Maintenance</small><span>12 mo. free</span></div><div><small>Domain</small><span>Included</span></div></div></div></header>
  <main>
- ${T('Introduction','01')}<p class="body">Smoothie Daddi serves health-conscious customers near LUTH with smoothies, fruity parfaits, sandwiches and small chops. Right now, orders happen through Instagram and WhatsApp. This website gives the brand a real home online — somewhere customers can browse the full menu, see what's available, and order with confidence.</p><p class="body">It's built to feel as fresh and friendly as the brand itself, and to make ordering easy whether it's a regular from OPH Complex or someone discovering Smoothie Daddi for the first time.</p></section>
- ${T('Pages and Structure','02')}<div class="grid">${p.pages.map(([a,b],i)=>`<div class="box ${i==p.pages.length-1&&p.pages.length%2?'wide':''}"><h4>${a}</h4><p>${b}</p></div>`).join('')}</div></section>
- ${T('How Ordering Works','03')}<div class="steps">${p.pay.map(([a,b],i)=>`<div class="step"><div class="dot">${i+1}</div><div><h4>${a}</h4><p>${b}</p></div></div>`).join('')}</div></section>
- ${T('Technology Stack','04')}<p class="body">A modern, reliable stack that keeps pages fast and the site easy to maintain as the menu grows.</p><div class="chips">${p.tech.map(([a,b])=>`<div class="chip"><b>${a}</b><small>${b}</small></div>`).join('')}</div></section>
- ${T('What is Included','05')}<div class="feats">${feats}</div></section>
- ${T('Estimated Timeline','06')}<div class="tl">${p.tl.map(([a,b])=>`<div><b>${a}</b><p>${b}</p></div>`).join('')}</div></section>
- ${T('Investment','07')}<div class="tbl">${p.bd.map(([a,b,c])=>`<div class="row"><b>${a}</b><span>${b}</span><em>${N(c)}</em></div>`).join('')}<div class="row free"><b>12 Months Maintenance</b><span>${N(p.fee)} x 12 months: fixes, content updates, monitoring</span><em><s>${N(p.fee*12)}</s><span class="fb">FREE</span></em></div><div class="total"><span>Total Investment · ${p.usd} USD</span><em>${N(p.price)}</em></div></div>
- <div class="pb"><p class="eyebrow">Total Investment</p><div class="n disp pop" data-n="${p.price}">${N(p.price)}</div><p>${p.usd} USD · Maintenance worth ${N(p.fee*12)} included free</p><p style="color:var(--mango)">Domain setup included · ${p.wk} weeks delivery</p>
- <div class="plan"><div><small>Deposit · 50%</small><b>${N(dep)}</b><small style="font-weight:400">Before work begins</small></div><div><small>Balance · 50%</small><b>${N(dep)}</b><small style="font-weight:400">Upon delivery</small></div></div></div></section>
- ${T('Terms and Conditions','08')}<div class="terms">${terms.map(t=>`<div class="f">${chk}<span>${t}</span></div>`).join('')}</div></section>
- ${T('Next Steps','09')}<p class="body" style="margin-bottom:22px">To proceed, confirm your chosen plan and make the initial deposit. Work begins right away. Questions before committing? Reach out anytime.</p><div class="contact"><div><small>Developer</small>David Ajibua</div><div><small>Email</small>davidajibua78@gmail.com</div><div><small>Phone and WhatsApp</small>07068634125</div><div><small>Date issued</small>October 14, 2026</div></div></section>
- </main><footer>Smoothie Daddi · Website Proposal 0${p.n} · Prepared by David Ajibua · October 14, 2026</footer>`}
-document.getElementById('cards').innerHTML=P.map(p=>`<div class="pc" onclick="show('v${p.n}')"><span class="tag">${p.tag}</span><p class="eyebrow" style="margin-bottom:8px">Proposal 0${p.n}</p><h2 class="disp">${p.name}</h2><p>${p.blurb}</p><div class="price disp pop">${N(p.price)}</div><div class="usd">Approximately ${p.usd} USD · ${p.wk} Weeks</div><span class="btn">View proposal →</span></div>`).join('');
-P[1].pages=P[0].pages;
+ ${S('01','Introduction',`<div class="intro"><p class="l rv">Smoothie Daddi serves <mark>health-conscious customers</mark> near LUTH with smoothies, fruity parfaits, sandwiches and small chops.</p><p class="s rv">Right now, orders happen through Instagram and WhatsApp. This website gives the brand a real home online — somewhere customers can browse the full menu, see what's available, and order with confidence.</p><p class="s rv" style="margin-top:12px">It's built to feel as fresh and friendly as the brand itself, and to make ordering easy whether it's a regular from OPH Complex or someone discovering Smoothie Daddi for the first time.</p></div>`)}
+ ${S('02','Pages and Structure',`<div class="grid">${p.pages.map(([a,b],i)=>`<div class="box rv"><span class="pn">PAGE 0${i+1}</span><h4>${a}</h4><p>${b}</p></div>`).join('')}</div>`)}
+ ${S('03','How Ordering Works',`<div class="steps">${p.pay.map(([a,b],i)=>`<div class="step rv"><div class="dot">${i+1}</div><div class="c"><h4>${a}</h4><p>${b}</p></div></div>`).join('')}</div>`)}
+ ${S('04','Technology Stack',`<p class="techn rv">A modern, reliable stack that keeps pages fast and the site easy to maintain as the menu grows.</p><div class="chips">${p.tech.map(([a,b])=>`<div class="chip rv"><b>${a}</b><small>${b}</small></div>`).join('')}</div>`)}
+ ${S('05','What is Included',`<div class="feats">${feats}</div>`)}
+ ${S('06','Estimated Timeline',`<div class="tl">${p.tl.map(([a,b])=>`<div class="rv"><b>${a}</b><p>${b}</p></div>`).join('')}</div>`)}
+ ${S('07','Investment',`<div class="ticket rv"><div class="t-top"><span>Estimate · SD-0${p.n}</span><span>14 Oct 2026</span></div>${p.bd.map(([a,b,c])=>`<div class="row"><b>${a}</b><em class="p">${N(c)}</em><span>${b}</span></div>`).join('')}<div class="row free"><b>12 Months Maintenance</b><em class="p"><s>${N(p.fee*12)}</s><span class="fb">FREE</span></em><span>${N(p.fee)} x 12 months: fixes, content updates, monitoring</span></div><div class="perf"></div><div class="tot"><small>Total investment · ${p.usd} USD</small><div class="n">${N(p.price)}</div><p>Maintenance worth ${N(p.fee*12)} included free · Domain setup included · ${p.wk} weeks delivery</p></div></div>
+ <div class="plan rv"><div><small>Deposit · 50%</small><b>${N(dep)}</b><span>Before work begins</span></div><div><small>Balance · 50%</small><b>${N(dep)}</b><span>Upon delivery</span></div></div>`)}
+ ${S('08','Terms and Conditions',`<div class="terms">${terms.map(t=>`<div class="t rv"><span>${t}</span></div>`).join('')}</div>`)}
+ ${S('09','Next Steps',`<div class="cta rv"><h3>Ready when <em>you are.</em></h3><p class="s">To proceed, confirm your chosen plan and make the initial deposit. Work begins right away. Questions before committing? Reach out anytime.</p><div class="btns"><a class="btn m" href="${wa(p)}" target="_blank" rel="noopener">${WA}Start on WhatsApp</a><a class="btn o" href="mailto:davidajibua78@gmail.com?subject=${encodeURIComponent('Smoothie Daddi website · '+p.tag+' plan')}">Send an email</a></div><div class="ci"><div><small>Developer</small>David Ajibua</div><div><small>Date issued</small>October 14, 2026</div><div><small>Phone and WhatsApp</small>07068634125</div><div class="w"><small>Email</small>davidajibua78@gmail.com</div></div></div>`)}
+ </main><footer>SMOOTHIE DADDI · PROPOSAL 0${p.n} · PREPARED BY DAVID AJIBUA</footer>`;
+}
+
+document.getElementById('home').innerHTML=home();
 P.forEach(p=>document.getElementById('v'+p.n).innerHTML=build(p));
-document.querySelectorAll('.pc').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
-const SEL='#home > *,.pc,.hero > *,.stats div,.sh,.body,.box,.step,.chip,.f,.tl div,.row,.total,.pb,.pb .plan div,.contact div';
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add('s');io.unobserve(t);setTimeout(()=>{t.classList.remove('rv','s');t.style.transitionDelay=''},1600)}}),{threshold:.1,rootMargin:'0px 0px -6% 0px'});
-function prep(v){v.querySelectorAll(SEL).forEach(el=>{const i=[...el.parentNode.children].indexOf(el);el.classList.remove('s');el.classList.add('rv');el.style.transitionDelay=Math.min(i,6)*90+'ms';io.observe(el)})}
-function show(id,push=true){document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));const v=document.getElementById(id);v.classList.add('on');scrollTo(0,0);prep(v);if(push)history.pushState({id},'')}
-history.replaceState({id:'home'},'');prep(document.getElementById('home'));addEventListener('popstate',e=>show(e.state?e.state.id:'home',false));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+const bar=document.getElementById('bar');
+function show(id){
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+ const v=document.getElementById(id);v.classList.add('on');window.scrollTo(0,0);
+ v.querySelectorAll('.rv:not(.in)').forEach((el,i)=>{el.style.transitionDelay=(i%4)*60+'ms';io.observe(el)});
+ const p=P.find(q=>'v'+q.n===id);
+ if(p){bar.style.setProperty('--acc',p.acc);bar.innerHTML=`<div><small>${p.tag} plan</small><b>${N(p.price)}</b></div><a href="${wa(p)}" target="_blank" rel="noopener">Start this plan →</a>`;requestAnimationFrame(()=>bar.classList.add('show'))}
+ else bar.classList.remove('show');
+}
+function route(){const h=location.hash.replace('#','');show(['1','2','3'].includes(h)?'v'+h:'home')}
+addEventListener('hashchange',route);route();
 addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('prog').style.width=(scrollY/(h.scrollHeight-innerHeight||1)*100)+'%'},{passive:true});
 </script></body></html>
